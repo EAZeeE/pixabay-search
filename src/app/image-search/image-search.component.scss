@@ -1,0 +1,15 @@
+
+.card-image {
+  min-height: 100%;
+  min-width: calc(100% + 17px);
+  //min-width: -webkit-fill-available;
+}
+
+.padding-zero-important {
+  padding: 0 !important;
+}
+
+.tags {
+  font-size: 10px;
+  text-shadow: 1px 0 3px black;
+}

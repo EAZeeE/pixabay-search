@@ -8,6 +8,15 @@ import { ImageSearchComponent } from './image-search/image-search.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {MatCardModule} from "@angular/material/card";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatBadgeModule} from "@angular/material/badge";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {UserAvatarComponent} from "./components/user-avatar/user-avatar.component";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -20,7 +29,16 @@ import {MatInputModule} from "@angular/material/input";
     AppRoutingModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatCardModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatTooltipModule,
+    UserAvatarComponent,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

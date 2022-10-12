@@ -1,0 +1,10 @@
+
+<div class="flex items-center gap-2">
+  <img *ngIf="src else noImage" width="40" height="40" [src]="src" alt="" class="avatar">
+  <ng-template #noImage>
+    <mat-icon class="text-shadow" style="width: 40px; height: 40px; font-size: 39px">account_circle</mat-icon>
+  </ng-template>
+  <span class="font-bold text-shadow">
+    {{user}}
+  </span>
+</div>

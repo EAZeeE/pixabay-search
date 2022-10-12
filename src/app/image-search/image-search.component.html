@@ -1,7 +1,7 @@
-<div class="mt-4 flex justify-center">
+<div [formGroup]="form" class="mb-5 p-4 flex justify-center">
   <mat-form-field color="accent" appearance="standard">
     <mat-label>Search for an image</mat-label>
-    <input matInput placeholder="Search">
+    <input matInput placeholder="Search" formControlName="search" required>
     <mat-icon matSuffix>search</mat-icon>
     <mat-hint>
       <span class="flex items-center justify-end">
@@ -9,5 +9,37 @@
       </span>
     </mat-hint>
   </mat-form-field>
+</div>
+
+<div class="container mx-auto mt-5" *ngIf="searchRes$ | async as searchRes">
+  <mat-grid-list cols="4" gutterSize="5" rowHeight="4:3">
+    <mat-grid-tile
+      *ngFor="let hit of searchRes?.hits"
+      [colspan]="hit.imageWidth > hit.imageHeight * 2.5 ? 2 : 1"
+      [rowspan]="hit.imageHeight > hit.imageWidth || hit.imageHeight * 1.1  > hit.imageWidth? 2 : 1"
+    >
+      <mat-card class="h-full relative padding-zero-important">
+
+        <small class="font-mono absolute right-4 text-end bottom-1 tags">
+          {{hit.tags}}
+        </small>
+
+        <div class="absolute top-2 left-4">
+          <app-user-avatar [src]="hit.userImageURL" [user]="hit.user"></app-user-avatar>
+        </div>
+
+        <img class="card-image" mat-card-image [src]="hit.largeImageURL" [alt]="hit?.user">
+
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-paginator class="mt-6 mb-8 rounded-t-3xl"
+                 (page)="this.page$.next($event)"
+                 [length]="searchRes.total"
+                 [pageSize]="20"
+                 [pageSizeOptions]="[20, 50, 100, 200]"
+                 aria-label="Select page">
+  </mat-paginator>
 </div>
 
