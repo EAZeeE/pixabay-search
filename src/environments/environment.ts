@@ -2,8 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
-  production: false
+  production: false,
+  key: '30538748-bac22a4d78aa0d6b1174e33dd',
+  apiUrl: `https://pixabay.com/api`
 };
 
 /*
