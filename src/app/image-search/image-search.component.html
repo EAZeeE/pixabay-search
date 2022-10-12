@@ -2,7 +2,8 @@
   <mat-form-field color="accent" appearance="standard">
     <mat-label>Search for an image</mat-label>
     <input matInput placeholder="Search" formControlName="search" required>
-    <mat-icon matSuffix>search</mat-icon>
+    <mat-icon *ngIf="!loading" style="font-size: 14px" matSuffix>search</mat-icon>
+    <mat-spinner *ngIf="loading" class="mr-2" [diameter]="16" color="accent" matSuffix></mat-spinner>
     <mat-hint>
       <span class="flex items-center justify-end">
         Powered by <a class="float-right ml-3" href="https://pixabay.com/"> <img src="assets/logo.svg" alt="" width="100"> </a>
@@ -11,14 +12,14 @@
   </mat-form-field>
 </div>
 
-<div class="container mx-auto mt-5" *ngIf="searchRes$ | async as searchRes">
-  <mat-grid-list cols="4" gutterSize="5" rowHeight="4:3">
+<div class="container mx-auto mt-5 results-container flex flex-col" *ngIf="searchRes$ | async as searchRes else noSearch" #test>
+  <mat-grid-list [cols]="numberOfColumns" gutterSize="5" rowHeight="4:3" [@cardTransition]="searchRes" >
     <mat-grid-tile
       *ngFor="let hit of searchRes?.hits"
       [colspan]="hit.imageWidth > hit.imageHeight * 2.5 ? 2 : 1"
       [rowspan]="hit.imageHeight > hit.imageWidth || hit.imageHeight * 1.1  > hit.imageWidth? 2 : 1"
     >
-      <mat-card class="h-full relative padding-zero-important">
+      <mat-card class="h-full relative padding-zero-important min-w-full">
 
         <small class="font-mono absolute right-4 text-end bottom-1 tags">
           {{hit.tags}}
@@ -28,18 +29,37 @@
           <app-user-avatar [src]="hit.userImageURL" [user]="hit.user"></app-user-avatar>
         </div>
 
-        <img class="card-image" mat-card-image [src]="hit.largeImageURL" [alt]="hit?.user">
-
+        <img
+            class="card-image" mat-card-image
+            [src]="hit.webformatURL"
+            [alt]=""
+            (load)="loadedImages.push(hit.id)"
+            [@cardLoad]="loadedImages.includes(hit.id) ? 'done' : 'load'"
+        >
       </mat-card>
     </mat-grid-tile>
+
+    <p class="text-center text-lg py-12" *ngIf="searchRes.total === 0">
+      No results found
+    </p>
+
   </mat-grid-list>
 
-  <mat-paginator class="mt-6 mb-8 rounded-t-3xl"
-                 (page)="this.page$.next($event)"
-                 [length]="searchRes.total"
-                 [pageSize]="20"
-                 [pageSizeOptions]="[20, 50, 100, 200]"
-                 aria-label="Select page">
-  </mat-paginator>
+  <div class="mt-auto ">
+    <mat-paginator class="mt-6"
+                   (page)="this.page$.next($event); test.scrollIntoView({behavior: 'smooth'})"
+                   [length]="searchRes.total"
+                   color="accent"
+                   [pageSize]="20"
+                   [pageSizeOptions]="[20, 50, 100, 200]"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+
 </div>
+<ng-template #noSearch>
+  <p class="text-center py-12">
+    Search for any image by typing in the search box
+  </p>
+</ng-template>
 

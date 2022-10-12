@@ -17,6 +17,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {UserAvatarComponent} from "./components/user-avatar/user-avatar.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatBadgeModule,
     MatTooltipModule,
     UserAvatarComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
