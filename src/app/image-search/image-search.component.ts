@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {
   BehaviorSubject,
@@ -54,7 +54,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
     ])
   ]
 })
-export class ImageSearchComponent implements OnInit {
+export class ImageSearchComponent {
 
   loadedImages: number[] = [];
 
@@ -116,10 +116,6 @@ export class ImageSearchComponent implements OnInit {
           }
         }
       });
-  }
-
-  ngOnInit(): void {
-    this.form.get('search')?.setValue('cat and dog')
   }
 
 }
