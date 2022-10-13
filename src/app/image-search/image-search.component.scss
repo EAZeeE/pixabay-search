@@ -16,3 +16,10 @@
   font-size: 10px;
   text-shadow: 1px 0 3px black;
 }
+
+.proxy-switch {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  transform: scale(.8);
+}

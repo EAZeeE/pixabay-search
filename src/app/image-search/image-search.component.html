@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="mb-5 p-4 flex justify-center">
+<div [formGroup]="form" class="mb-5 p-6 flex justify-center">
   <mat-form-field color="accent" appearance="standard">
     <mat-label>Search for an image</mat-label>
     <input matInput placeholder="Search" formControlName="search">
@@ -11,11 +11,11 @@
     </mat-hint>
   </mat-form-field>
 
-  <div class="absolute right-5 top-5"
-       matTooltip="In some modern browsers, API CORS issues may occur.  To use the public proxy, please refresh.  Please note that the public proxy sends many additional requests which may result in the early limit of 1000 requests per minute."
+  <div class="proxy-switch"
+       matTooltip="If your requests are failing you may use a 3rd party proxy that adds the appropriate CORS headers for your browser.  WARNING:  use at your own risk - the request limit will be reached quickly"
   >
     <mat-slide-toggle (change)="toggleProxy($event)">
-      <span class="flex items-center gap-3">Use Proxy
+      <span class="flex items-center gap-3">Public Proxy
         <mat-icon>satellite_alt</mat-icon>
       </span>
     </mat-slide-toggle>
