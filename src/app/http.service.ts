@@ -16,7 +16,7 @@ export class HttpService {
     return this.http.get<SearchResponse>(environment.apiUrl, {
       params: {
         key: environment.key,
-        q: encodeURIComponent(query),
+        q: query,
         page: page + 1,
         per_page
       }
