@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {
-  BehaviorSubject,
+  BehaviorSubject, catchError,
   combineLatestWith,
   debounceTime,
   from, Subject,
@@ -79,7 +79,7 @@ export class ImageSearchComponent {
     debounceTime(200),
     switchMap(([q, page]: any) => {
       this.loading = true
-      return this.httpService.searchImages(q!, page.pageIndex, page.pageSize)
+      return this.httpService.searchImages(q!, page.pageIndex, page.pageSize).pipe(catchError(() => from([])))
     }),
     tap(() => {
       this.loading = false
