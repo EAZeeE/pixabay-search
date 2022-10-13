@@ -8,15 +8,15 @@ import {SearchResponse} from "./image-search/search-response";
   providedIn: 'root'
 })
 export class HttpService {
+  useProxy = false;
 
   constructor(private http: HttpClient) { }
 
   searchImages(query: string, page: any, per_page: any): Observable<SearchResponse> {
-    console.log(query, page, per_page)
     return this.http.get<SearchResponse>(environment.apiUrl, {
       params: {
         key: environment.key,
-        q: query,
+        q: encodeURIComponent(query),
         page: page + 1,
         per_page
       }

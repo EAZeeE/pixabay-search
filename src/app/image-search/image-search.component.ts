@@ -10,6 +10,7 @@ import {
 import {HttpService} from "../http.service";
 import {animate, group, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-image-search',
@@ -82,7 +83,6 @@ export class ImageSearchComponent {
     }),
     tap(() => {
       this.loading = false
-      // this.loadedImages = []
     })
   )
 
@@ -112,10 +112,13 @@ export class ImageSearchComponent {
       .subscribe(result => {
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
-            this.numberOfColumns = this.displayNameMap.get(query) ?? 2;
+            this.numberOfColumns = this.displayNameMap.get(query) ?? 2
           }
         }
       });
   }
 
+  toggleProxy(toggleChange: MatSlideToggleChange) {
+    this.httpService.useProxy = toggleChange.checked
+  }
 }
