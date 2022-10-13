@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {
   BehaviorSubject, catchError,
@@ -11,6 +11,8 @@ import {HttpService} from "../http.service";
 import {animate, group, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-image-search',
@@ -71,6 +73,7 @@ export class ImageSearchComponent {
   })
 
   loading = false
+  error = false
 
   searchRes$ = from(
     this.form.get('search')!.valueChanges
@@ -78,8 +81,12 @@ export class ImageSearchComponent {
     combineLatestWith([this.page$]),
     debounceTime(200),
     switchMap(([q, page]: any) => {
+      this.error = false
       this.loading = true
-      return this.httpService.searchImages(q!, page.pageIndex, page.pageSize).pipe(catchError(() => from([])))
+      return this.httpService.searchImages(q!, page.pageIndex, page.pageSize).pipe(catchError((e) => {
+        this.handleError(e)
+        return from([])
+      }))
     }),
     tap(() => {
       this.loading = false
@@ -99,7 +106,10 @@ export class ImageSearchComponent {
 
   numberOfColumns = 4;
 
-  constructor(private fb: FormBuilder, private httpService: HttpService, breakpointObserver: BreakpointObserver) {
+  proxyToggleValue = false
+  proxyOn = this.httpService.useProxy$
+
+  constructor(private fb: FormBuilder, private httpService: HttpService, private _snackBar: MatSnackBar, breakpointObserver: BreakpointObserver) {
     breakpointObserver
       .observe([
         Breakpoints.XSmall,
@@ -119,6 +129,33 @@ export class ImageSearchComponent {
   }
 
   toggleProxy(toggleChange: MatSlideToggleChange) {
-    this.httpService.useProxy = toggleChange.checked
+    this.proxyOn.next(toggleChange.checked)
+  }
+
+  private handleError(e: HttpErrorResponse) {
+    if (e.message) {
+      console.error(e.message)
+    }
+    this.loading = false
+    this.error = true
+
+    const snack = this._snackBar.open(
+      this.httpService.useProxy$.value ? 'You may sometimes quickly exceed the limit of 1000 requests per minute if you are using the proxy.  Please use Chrome for the best experience' :
+        'Try enabling the proxy'
+      , this.httpService.useProxy$.value ? 'Close' : 'Enable',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
+      }
+    );
+
+    if(!this.proxyToggleValue) {
+      snack.onAction().pipe(takeUntil(snack.afterDismissed())).subscribe(
+        () => {
+          this.httpService.useProxy$.next(true)
+          this.proxyToggleValue = true
+        }
+      )
+    }
   }
 }

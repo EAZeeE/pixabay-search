@@ -1,29 +1,40 @@
 <div [formGroup]="form" class="mb-5 p-6 flex justify-center">
-  <mat-form-field color="accent" appearance="standard">
+  <mat-form-field [color]="error ? 'primary' : 'accent'" appearance="standard">
     <mat-label>Search for an image</mat-label>
     <input matInput placeholder="Search" formControlName="search">
-    <mat-icon *ngIf="!loading" style="font-size: 14px" matSuffix>search</mat-icon>
-    <mat-spinner *ngIf="loading" class="mr-2" [diameter]="16" color="accent" matSuffix></mat-spinner>
+    <mat-icon *ngIf="error else notError" style="font-size: 14px" color="warn" matSuffix>error</mat-icon>
+    <ng-template #notError>
+      <mat-icon *ngIf="!loading" style="font-size: 14px" matSuffix>search</mat-icon>
+      <mat-spinner *ngIf="loading" class="mr-2" [diameter]="16" color="accent" matSuffix></mat-spinner>
+    </ng-template>
     <mat-hint>
       <span class="flex items-center justify-end">
         Powered by <a class="float-right ml-3" href="https://pixabay.com/"> <img src="assets/logo.svg" alt="" width="100"> </a>
       </span>
     </mat-hint>
   </mat-form-field>
+</div>
 
-  <div class="proxy-switch"
-       matTooltip="If your requests are failing you may use a 3rd party proxy that adds the appropriate CORS headers for your browser.  WARNING:  use at your own risk - the request limit will be reached quickly"
-  >
-    <mat-slide-toggle (change)="toggleProxy($event)">
+<div class="proxy-switch"
+     matTooltip="If your requests are failing you may use a 3rd party proxy (CORS.SH) that adds the appropriate CORS headers for your browser.  WARNING:  use at your own risk - the request limit will be reached quickly"
+>
+  <mat-slide-toggle (change)="toggleProxy($event)" [(ngModel)]="proxyToggleValue">
       <span class="flex items-center gap-3">Public Proxy
         <mat-icon>satellite_alt</mat-icon>
       </span>
-    </mat-slide-toggle>
-  </div>
-
+  </mat-slide-toggle>
 </div>
 
-<div class="container mx-auto mt-5 results-container flex flex-col" *ngIf="searchRes$ | async as searchRes" #test>
+<div class="container mx-auto mt-5 results-container flex flex-col" *ngIf="searchRes$ | async as searchRes" #container>
+
+  <!--<div class="p-5" *ngIf="error">
+    <p class="text-center text-lg py-12">
+      An error has occurred.
+      <br><br>
+      {{(proxyOn | async) ? 'You may sometimes quickly exceed the limit of 1000 requests per minute if you are using the proxy.  Please use Chrome for the best experience' : 'Try enabling the proxy'}}
+    </p>
+  </div>-->
+
   <mat-grid-list [cols]="numberOfColumns" gutterSize="5" rowHeight="4:3" [@cardTransition]="searchRes" >
     <mat-grid-tile
       *ngFor="let hit of searchRes?.hits"
@@ -56,9 +67,9 @@
 
   </mat-grid-list>
 
-  <div class="mt-auto ">
+  <div class="mt-auto">
     <mat-paginator class="mt-6"
-                   (page)="this.page$.next($event); test.scrollIntoView({behavior: 'smooth'})"
+                   (page)="this.page$.next($event); container.scrollIntoView({behavior: 'smooth'})"
                    [length]="searchRes.total"
                    color="accent"
                    [pageSize]="20"
