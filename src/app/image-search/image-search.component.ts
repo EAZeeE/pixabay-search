@@ -60,7 +60,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 export class ImageSearchComponent {
 
-  loadedImages: number[] = [];
+  loadedImages: number[] = []
 
   form = this.fb.group({
     search: ''
@@ -68,7 +68,7 @@ export class ImageSearchComponent {
 
   page$: BehaviorSubject<any> = new BehaviorSubject({
     pageIndex: 0,
-    pageSize: 20,
+    pageSize: 50,
     previousPageIndex: 0,
     length: 0
   })
@@ -105,9 +105,9 @@ export class ImageSearchComponent {
     [Breakpoints.XLarge, 4],
   ])
 
-  numberOfColumns = 4;
+  numberOfColumns = 4
 
-  proxyToggleValue = false
+  proxyToggleValue = true
   proxyOn = this.httpService.useProxy$
 
   constructor(private fb: FormBuilder, private httpService: HttpService, private _snackBar: MatSnackBar, breakpointObserver: BreakpointObserver) {

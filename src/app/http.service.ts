@@ -8,7 +8,7 @@ import {SearchResponse} from "./image-search/search-response";
   providedIn: 'root'
 })
 export class HttpService {
-  useProxy$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  useProxy$: BehaviorSubject<boolean> = new BehaviorSubject(true)
 
   constructor(private http: HttpClient) { }
 
