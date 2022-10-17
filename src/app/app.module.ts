@@ -21,11 +21,16 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {ProxyInterceptor} from "./proxy.interceptor";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDialogModule} from "@angular/material/dialog";
+import {GreetingDialogComponent} from "./greeting-dialog.component";
+import {MatButtonModule} from "@angular/material/button";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImageSearchComponent
+    ImageSearchComponent,
+    GreetingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,10 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatListModule
   ],
   providers: [
     {

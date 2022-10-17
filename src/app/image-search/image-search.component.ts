@@ -57,6 +57,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     ])
   ]
 })
+
 export class ImageSearchComponent {
 
   loadedImages: number[] = [];
@@ -140,7 +141,7 @@ export class ImageSearchComponent {
     this.error = true
 
     const snack = this._snackBar.open(
-      this.httpService.useProxy$.value ? 'You may sometimes quickly exceed the limit of 1000 requests per minute if you are using the proxy.  Please use Chrome for the best experience' :
+      this.httpService.useProxy$.value ? 'An unknown error occurred.  Please try again in a minute.' :
         'Try enabling the proxy'
       , this.httpService.useProxy$.value ? 'Close' : 'Enable',
       {
