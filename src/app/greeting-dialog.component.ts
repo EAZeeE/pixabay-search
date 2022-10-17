@@ -13,7 +13,7 @@ import {MatDialogRef} from "@angular/material/dialog";
         <ol role="list">
           <span>Features: </span>
           <li>- Automatic debounced searching</li>
-          <li>- Optional proxy for Firefox support</li>
+          <li>- Proxy for SSL & browser support</li>
           <li>- Pagination</li>
           <li>- Transitions</li>
         </ol>
