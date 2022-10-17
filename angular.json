@@ -47,7 +47,6 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/web.config",
               "src/assets"
             ],
             "styles": [

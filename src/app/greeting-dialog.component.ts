@@ -4,7 +4,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 @Component({
   selector: 'app-greeting-dialog',
   template: `
-    <h1 mat-dialog-title>Welcome MLC</h1>
+    <h1 mat-dialog-title>Welcome MLA</h1>
     <div mat-dialog-content>
       <p>Thanks again for this wonderful opportunity, I hope you enjoy this demo!</p>
 
@@ -23,7 +23,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 
       <p>Please let me know if you have any questions.</p>
 
-      <p>Best Regards, <br> Edwin</p>
+      <p>Best regards, <br> Edwin</p>
 
     </div>
 
