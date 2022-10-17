@@ -1,12 +1,12 @@
-# PixaBay Image Search UI
+#  PixilArt - PixaBay Image Search UI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
 
-## Hosted App 
+## Hosted Application
 
-Please find the hosted application below for convenience:
+The demo application is currently hosted on
 
-[PixaBay Search Hosted Demo](http://pixabay-ui.s3-website-eu-west-1.amazonaws.com/)
+[https://pixilart.media](https://pixilart.media)
 
 ## Running Server Locally
 
@@ -18,7 +18,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Thank you
 
-Thanks again for this opportunity, I am very excited and cannot wait to hear from you.
+Thanks again for this awesome opportunity, I am very excited and cannot wait to hear from you.
 
 Best regards,
 Edwin
