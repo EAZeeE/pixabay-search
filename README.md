@@ -16,6 +16,10 @@ Install modules and dependencies by running `npm install`.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## NEXT.JS
+Please find the Next.js version of this application at [https://github.com/EAZeeE/pixabay-next/](https://github.com/EAZeeE/pixabay-next/) 
+
+
 ## Thank you
 
 Thanks again for this awesome opportunity, I am very excited and cannot wait to hear from you.

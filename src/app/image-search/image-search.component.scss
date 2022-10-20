@@ -4,6 +4,9 @@
 
 .card-image {
   min-height: 100%;
+  //height: auto;
+  //width: auto;
+  object-fit: cover;
   min-width: calc(100% + 17px);
   //min-width: -webkit-fill-available;
 }

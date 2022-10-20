@@ -29,7 +29,7 @@
 
   <mat-grid-list [cols]="numberOfColumns" gutterSize="5" rowHeight="4:3" [@cardTransition]="searchRes" >
     <mat-grid-tile
-      *ngFor="let hit of searchRes?.hits"
+      *ngFor="let hit of searchRes?.hits; let i = index"
       [colspan]="hit.imageWidth > hit.imageHeight * 2.5 ? 2 : 1"
       [rowspan]="hit.imageHeight > hit.imageWidth || hit.imageHeight * 1.1  > hit.imageWidth? 2 : 1"
     >
@@ -45,7 +45,10 @@
 
         <img
             class="card-image" mat-card-image
-            [src]="hit.webformatURL"
+            [ngSrc]="hit.webformatURL"
+            [width]="hit.imageWidth"
+            [height]="hit.imageHeight"
+            [priority]="i < 20"
             [alt]=""
             (load)="loadedImages.push(hit.id)"
             [@cardLoad]="loadedImages.includes(hit.id) ? 'done' : 'load'"

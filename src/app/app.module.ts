@@ -25,6 +25,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {GreetingDialogComponent} from "./greeting-dialog.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatListModule} from "@angular/material/list";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {MatListModule} from "@angular/material/list";
     MatSnackBarModule,
     MatDialogModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    NgOptimizedImage
   ],
   providers: [
     {
